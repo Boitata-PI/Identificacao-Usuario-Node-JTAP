@@ -1,0 +1,41 @@
+<head>
+    <link rel="stylesheet" href="/public/css/dashboard.css">
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<form action="/editar/{{id}}" method="POST">
+    <div class="mb-3 text-start">
+        <label class="form-label">Nome:</label>
+        <input type="name" name="nome" class="form-control" id="nome" value="{{agendamento.nome}}">
+    </div>
+    <div class="mb-3 text-start">
+        <label class="form-label">Telefone:</label>
+        <input type="number" name="telefone" class="form-control" id="telefone" placeholder="(00)00000-0000"  value="{{agendamento.telefone}}">
+    </div>
+    <div class="mb-3 text-start">
+        <label class="form-label">Origem:</label>
+        <select name="origem" class="form-select" aria-label="Default select example">
+            <option value="{{agendamento.origem}}" selected>{{agendamento.origem}}</option>
+            <option value="Celular">Celular</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Telefone">Telefone</option>
+        </select>
+    </div>
+    <div class="mb-3 text-start">
+        <label class="form-label">Data do Contato:</label>
+        <input type="date" name="data_contato" class="form-control" id="data_contato" aria-describedby="emailHelp"  value="{{agendamento.data_contato}}">
+    </div>
+    <div class="mb-3 text-start">
+        <label class="form-label">Observação:</label>
+        <textarea name="observacao" class="form-control" placeholder="" id="observacao" style="height: 100px">{{agendamento.observacao}}</textarea>
+    </div>
+    <div class="mb-3 text-start">
+        <button type="submit" class="btn btn-primary">Editar</button>
+    </div>
+</form>
