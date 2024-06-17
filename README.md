@@ -1,5 +1,5 @@
 # ETAPAS
-O projeto ainda está finalizado:
+O projeto está finalizado. Contendo:
 
 - [x] Estrutura
 - [x] Front-End
