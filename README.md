@@ -2,9 +2,9 @@
 O projeto ainda está finalizado:
 
 - [x] Estrutura
-- [ ] Front-End
-- [ ] Login
-- [ ] Cadastro
+- [x] Front-End
+- [x] Login
+- [x] Cadastro
 
 > Projeto CRUD com Firebase FireStore em Node.js e Handlebars com Autenticação do Firebase 
 
