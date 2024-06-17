@@ -6,8 +6,6 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const handlebars = require("express-handlebars").engine;
-const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
-const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
 const helpers = require("handlebars-helpers")();
 
 require("dotenv").config();
@@ -35,6 +33,12 @@ app.use(session({
     saveUninitialized: true
 }));
 
+// Middleware para passar informações do usuário para as views
+app.use((req, res, next) => {
+    res.locals.user = req.session.user;
+    next();
+});
+
 //Iniciando Cookies Auth e Router
 app.use(express.json());
 app.use(cookieParser());
@@ -54,6 +58,14 @@ function isLogged(req){
 }
 
 
+function deslogar(req, res){
+    //destruir cookies
+    res.clearCookie('access_token');
+    req.session.user = null;
+    return res.redirect("/login");
+}
+
+
 //ROTAS
 //INDEX
 app.get('/', (req, res) => {
@@ -61,8 +73,9 @@ app.get('/', (req, res) => {
         if(isLogged(req)){
             return res.redirect("/dashboard");
         }
-
-        return res.redirect("/login");
+        else{
+            return deslogar();
+        }
     }catch(error){
         console.log('Erro ao Redirecionar: ', error);
         return res.render("errors/error", {layout: "guest", codError: "500", textError: 'Erro no Servidor!'});

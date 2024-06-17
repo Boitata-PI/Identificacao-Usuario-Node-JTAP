@@ -1,0 +1,30 @@
+
+<head>
+    <link rel="stylesheet" href="/public/css/adicionar.css">
+</head>
+ 
+
+<div class="card">
+    <form class="editar" action="/api/alter-password" method="POST">
+    <h1 class="top-text">Alterar Senha (Login)</h1>
+        
+        <div class="mb-3 text-start">
+            <label class="form-label">Email:</label>
+            <input type="email" name="email" value="{{ user.email }}" class="form-control" required id="email">
+        </div>
+
+        <div class="mb-3 text-start">
+            <label class="form-label">Senha Antiga:</label>
+            <input type="password" name="oldPassword" minlength="6" maxlength="14" class="form-control" required id="oldPassword">
+        </div>
+
+        <div class="mb-3 text-start">
+            <label class="form-label">Senha:</label>
+            <input type="password" name="newPassword" minlength="6" maxlength="14" class="form-control" required id="newPassword">
+        </div>
+
+        <div class="mb-3 text-start">
+            <button type="submit" class="btn btn-primary">Alterar</button>
+        </div>
+    </form>
+</div>

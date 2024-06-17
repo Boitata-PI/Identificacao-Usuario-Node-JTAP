@@ -1,14 +1,16 @@
 require("dotenv").config();
 const firebase = require("firebase/app") 
 const admin = require('firebase-admin');
+const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
 const { 
   getAuth, 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
   signOut, 
   sendEmailVerification, 
-  sendPasswordResetEmail
-
+  sendPasswordResetEmail,
+  updatePassword
 } = require("firebase/auth") ;
 
 
@@ -17,6 +19,9 @@ const serviceAccount = require("../firebase-key.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+
+
+const db = getFirestore();
 
 
 const firebaseConfig = {
@@ -39,5 +44,7 @@ module.exports = {
   signOut,
   sendEmailVerification,
   sendPasswordResetEmail,
-  admin
+  updatePassword,
+  admin,
+  db,
 };

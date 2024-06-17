@@ -1,39 +1,55 @@
-const banditRepository = require('../repositories/BanditRepository');
+const BanditRepository = require('../repositories/bandit-repository.js');
 
 class BanditController {
-    dashboard(req, res){
-        res.render('dashboard');
+    async dashboard(req, res){
+        var bandits = await BanditRepository.getBandits();
+        var bandits_list = [];
+
+        bandits.forEach(doc => {
+            var key = doc.id;
+            var data = doc.data();
+            data.key = key;
+            bandits_list.push(data);
+        })
+
+        res.render('dashboard', { bandits: bandits_list});
     }
 
-    getBandit(req, res) {
-        const bandit = {
-            id: 1,
-            name: "Bandit 1",
-            level: 1,
-            attack: 10,
-            defense: 5,
-            agility: 3,
-        };
-        res.render('ecrime', { bandit });
+    profile(req, res){
+        res.render('profile', { user: req.user });
     }
 
-    editBandit(req, res) {
-        const bandit = {
-            id: 1,
-            name: "Bandit 1",
-            level: 1,
-            attack: 10,
-            defense: 5,
-            agility: 3,
-        };
-
-        res.render('edit', { bandit });
+    async ecrime(req, res){
+        var bandit = await BanditRepository.getBanditByKey(req.params.key);
+        res.render('ecrime', { bandit: bandit.data() });
     }
 
-    updateBandit(req, res) {
+    createBandit(req, res){
+        res.render('register-bandit');
+    }
+
+    async storeBandit(req, res){
         const bandit = req.body;
-        console.log(bandit);
+        await BanditRepository.createBandit(bandit);
+        res.redirect('/dashboard');
+    }
+
+    async editBandit(req, res) {
+        var bandit = await BanditRepository.getBanditByKey(req.params.key);
+
         res.render('edit', { bandit });
+    }
+
+    async updateBandit(req, res) {
+        var bandit = await BanditRepository.updateBandit(req.params.key, req.body);
+
+        res.render('edit', { bandit });
+    }
+
+    async deleteBandit(req, res) {
+        await BanditRepository.deleteBandit(req.params.key);
+
+        res.redirect('/dashboard');
     }
 }
 

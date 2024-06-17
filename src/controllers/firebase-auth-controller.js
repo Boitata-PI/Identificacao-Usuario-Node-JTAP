@@ -4,10 +4,12 @@ const {
   signInWithEmailAndPassword, 
   signOut, 
   sendEmailVerification,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  updatePassword,
 } = require('../config/firebase');
 
 const auth = getAuth();
+const user = auth.currentUser;
 
 
 
@@ -35,6 +37,7 @@ class FirebaseAuthController
         sendEmailVerification(auth.currentUser)
           .then(() => {
             const idToken = userCredential._tokenResponse.idToken;
+            req.session.user = { email: userCredential.user.email };
 
             if (idToken) {
               res.cookie('access_token', idToken, {
@@ -75,6 +78,7 @@ class FirebaseAuthController
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => { 
         const idToken = userCredential._tokenResponse.idToken;
+        req.session.user = { email: userCredential.user.email };
         
         if (idToken) {
           res.cookie('access_token', idToken, {
@@ -130,6 +134,27 @@ class FirebaseAuthController
         console.error(error);
         res.status(500).json({ codError: "Internal Server Error" });
       });
+  }
+
+
+
+  alterPassword(req, res) 
+  {
+    const { email, oldPassword, newPassword } = req.body;
+
+    if (!email || !newPassword || !oldPassword) {
+      req.session.error = 'Campos Vázios!';
+
+      return res.redirect("/");
+    }
+
+    updatePassword(user, newPassword).then(() => {
+      req.session.success = 'Senha Alterada com Sucesso!';
+      res.redirect("/profile");
+    }).catch(error => {
+      console.error(error);
+      res.render("errors/error", {layout: "guest", codError: "500", textError: 'Erro no Servidor!'});
+    });
   }
 }
 

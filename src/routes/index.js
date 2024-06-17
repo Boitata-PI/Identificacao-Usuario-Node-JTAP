@@ -11,13 +11,17 @@ router.post('/api/register', firebaseAuthController.registerUser);
 router.post('/api/login', firebaseAuthController.loginUser);
 router.post('/api/logout', firebaseAuthController.logoutUser);
 router.post('/api/reset-password', firebaseAuthController.resetPassword);
+router.post('/api/alter-password', firebaseAuthController.alterPassword);
 
 
-// Bandit routes
+// Authenticated Routes
 router.get('/dashboard', verifyToken, BanditController.dashboard);
-router.get('/ecrime', verifyToken, BanditController.getBandit);
-router.get('/edit', verifyToken, BanditController.editBandit);
-router.post('/update', verifyToken, BanditController.updateBandit);
+router.get('/profile', verifyToken, BanditController.profile);
+router.get('/ecrime/:key', verifyToken, BanditController.ecrime);
+router.get('/create/bandit', verifyToken, BanditController.createBandit);
+router.post('/create/bandit', verifyToken, BanditController.storeBandit);
+router.get('/edit/bandit/:key', verifyToken, BanditController.editBandit);
+router.post('/edit/bandit/:key', verifyToken, BanditController.updateBandit);
 
 
 

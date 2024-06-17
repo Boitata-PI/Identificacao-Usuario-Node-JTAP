@@ -1,22 +1,20 @@
 //REPOSITORY FOR FIREBASE FIRESTORE DATABASE WITH TRY CATCH BLOCKS
-class BanditRepository{
-    constructor(firestore){
-        this.firestore = firestore;
-    }
 
+const { db } = require("../config/firebase");
+
+class BanditRepository{
     async getBandits(){
         try{
-            const bandits = await this.firestore.collection('bandits').get();
+            const bandits = await db.collection('bandits').get();
             return bandits;
         }catch(error){
             console.error('Error getting bandits', error);
         }
     }
 
-    async getBanditById(id){
+    async getBanditByKey(key){
         try{
-            const bandit = await this.firestore.collection('bandits').doc(id).get();
-            return bandit;
+            return await db.collection('bandits').doc(key).get();
         }catch(error){
             console.error('Error getting bandit by id', error);
         }
@@ -24,7 +22,7 @@ class BanditRepository{
 
     async createBandit(bandit){
         try{
-            const response = await this.firestore.collection('bandits').add(bandit);
+            const response = await db.collection('bandits').add(bandit);
             return response;
         }catch(error){
             console.error('Error creating bandit', error);
@@ -33,7 +31,7 @@ class BanditRepository{
 
     async updateBandit(id, bandit){
         try{
-            await this.firestore.collection('bandits').doc(id).update(bandit);
+            await db.collection('bandits').doc(id).update(bandit);
             return true;
         }catch(error){
             console.error('Error updating bandit', error);
@@ -42,10 +40,13 @@ class BanditRepository{
 
     async deleteBandit(id){
         try{
-            await this.firestore.collection('bandits').doc(id).delete();
+            await db.collection('bandits').doc(id).delete();
             return true;
         }catch(error){
             console.error('Error deleting bandit', error);
         }
     }
 }
+
+
+module.exports = new BanditRepository();
