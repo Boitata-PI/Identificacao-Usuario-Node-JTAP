@@ -5,6 +5,10 @@ class BanditController {
         res.render('dashboard');
     }
 
+    home(req, res){
+        res.render('home');
+    }
+
     getBandit(req, res) {
         const bandit = {
             id: 1,
@@ -17,7 +21,7 @@ class BanditController {
         res.render('ecrime', { bandit });
     }
 
-    editBandit(req, res) {
+    adicionarBandit(req, res) {
         const bandit = {
             id: 1,
             name: "Bandit 1",
@@ -27,7 +31,7 @@ class BanditController {
             agility: 3,
         };
 
-        res.render('edit', { bandit });
+        res.render('adicionar', { bandit });
     }
 
     updateBandit(req, res) {

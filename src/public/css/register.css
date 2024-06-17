@@ -2,12 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 .main-login {
     width: 100vw;
     height: 100vh;
-    background: #16161A;
+    background: #000000;
+    background-image: url(/public/img/logo/cadeia.jpg);
     display: flex; 
     justify-content: center;
     align-items: center;
@@ -45,13 +47,13 @@
     align-items: center;
     flex-direction: column;
     padding: 30px 35px;
-    background: #FFFFFE;
+    background: #ffffffcb;
     border-radius: 20px;
     box-shadow: 0px 10px 20px #3d3d3d;
 }
 
 .card-login > h1 {
-    color: #094067;
+    color: #4B0082;
     font-weight: 800;
     margin: 0;
 }
@@ -60,6 +62,7 @@
 .registro-texto {
     text-align: left;
 }
+
 
 
 .textfield {
@@ -76,7 +79,7 @@
     border: none;
     border-radius: 10px;
     padding: 15px;
-    background: #6782AA;
+    background: #4B0082;
     color: #FFFFFE;
     font-size: 12pt;
     box-shadow: 0px 10px 40px #00000056;
@@ -85,7 +88,7 @@
 }
 
 .textfield > label {
-    color: #49535a;
+    color: #000000;
     font-size: medium;
     margin-bottom: 10px;
 }
@@ -105,13 +108,13 @@
     font-weight: 800;
     letter-spacing: 3px;
     color: #FFFFFE;
-    background: #536F98;
+    background: #4B0082;
     cursor: pointer;
     box-shadow: 0px 10px 20px -12px #25252552;
 }
 
 .btn-login:hover{
-    background: #304058;
+    background: #a5049d;
     
 }
 

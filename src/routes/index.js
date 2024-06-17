@@ -14,10 +14,10 @@ router.post('/api/reset-password', firebaseAuthController.resetPassword);
 
 
 // Bandit routes
-router.get('/dashboard', verifyToken, BanditController.dashboard);
-router.get('/ecrime', verifyToken, BanditController.getBandit);
-router.get('/edit', verifyToken, BanditController.editBandit);
-router.post('/update', verifyToken, BanditController.updateBandit);
+router.get('/dashboard', BanditController.dashboard);
+router.get('/ecrime',  BanditController.getBandit);
+router.get('/adicionar',  BanditController.adicionarBandit);
+router.post('/update',  BanditController.updateBandit);
 
 
 

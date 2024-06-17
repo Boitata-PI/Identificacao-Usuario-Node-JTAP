@@ -1,0 +1,46 @@
+
+<head>
+     <link rel="stylesheet" href="/public/css/adicionar.css">
+</head>
+
+
+<form class="editar" action="/editar/{{id}}" method="POST">
+<h1 class="top-text"> Editar Dados Pessoais</h1>
+
+
+    <div class="img">
+        <img src="https://via.placeholder.com/150" alt="Imagem do estudante" id="estudante-imagem">
+    </div>
+    
+    <div class="imgg">
+        <input  type="file" id="upload-imagem" accept="image/*" onchange="carregarImagem(event)">
+    </div>
+
+    <div class="mb-3 text-start">
+        <label class="form-label">Vulgo:</label>
+        <input type="name" name="nome" class="form-control" id="nome" value="{{agendamento.nome}}">
+    </div>
+    <div class="mb-3 text-start">
+            <label class="form-label">Facção:</label>
+            <input type="name" name="nome" class="form-control" id="nome" value="{{agendamento.nome}}">
+    </div>
+
+    <div class="mb-3 text-start">
+            <label class="form-label">Cargo:</label>
+            <input type="name" name="nome" class="form-control" id="nome" value="{{agendamento.nome}}">
+    </div>
+
+    <div class="mb-3 text-start">
+            <label class="form-label">Nível de procurado:</label>
+            <input type="name" name="nome" class="form-control" id="nome" value="{{agendamento.nome}}">
+    </div>
+
+    <div class="mb-3 text-start">
+            <label class="form-label">Quebrada:</label>
+            <input type="name" name="nome" class="form-control" id="nome" value="{{agendamento.nome}}">
+    </div>
+
+    <div class="mb-3 text-start">
+        <button type="submit" class="btn btn-primary">Editar</button>
+    </div>
+</form>
